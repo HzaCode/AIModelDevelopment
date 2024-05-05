@@ -4,9 +4,11 @@ from io import StringIO
 import webbrowser
 
 
-df = pd.read_csv(r'gantt_chart_new.csv', encoding='latin1')
-df['Start'] = df['Start'].astype('datetime64')
-df['Finish'] = df['Finish'].astype('datetime64')
+data = StringIO("""
+Task,Start,Finish,Model,Main Activity
+
+""")
+df = pd.read_csv(data, parse_dates=["Start", "Finish"])
 
 
 colors = {'': 'rgb(30,144,255)', '': 'rgb(95,158,160)', '': 'rgb(255,165,0)'}
