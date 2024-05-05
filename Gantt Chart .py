@@ -1,21 +1,21 @@
 import pandas as pd
 import plotly.express as px
+from io import StringIO
+import webbrowser
 
 
 df = pd.read_csv(r'gantt_chart_new.csv', encoding='latin1')
 df['Start'] = df['Start'].astype('datetime64')
 df['Finish'] = df['Finish'].astype('datetime64')
 
-#set label colors
-colors = {
-    '': 'rgb(30,144,255)', '': 'rgb(211,211,211)',
-    '': 'rgb(95,158,160)', '': 'rgb(0,0,128)', '': 'rgb(211,211,210)'
-}
+
+colors = {'': 'rgb(30,144,255)', '': 'rgb(95,158,160)', '': 'rgb(255,165,0)'}
+
 
 
 fig = px.timeline(df, x_start="Start", x_end="Finish", y="Resource", hover_name="Task",
                   color_discrete_sequence=px.colors.qualitative.Prism, opacity=.7, color='Dimension',
-                  title="<b>IE 3.0 Gantt Chart 2021</b>", height=1200)
+                  title=""<b>AI Model Development Gantt Chart</b>"", height=1200)
 
 
 fig.update_layout(
@@ -48,6 +48,6 @@ fig.update_layout(
 
 fig.update_traces(marker_line_color='rgb(8,48,107)', marker_line_width=1.5, opacity=0.95)
 
-fig.write_html("gantt_chart.html")
-
-fig.show()
+file_path = "gantt_chart.html"
+fig.write_html(file_path)
+webbrowser.open('file://' + os.path.realpath(file_path))
